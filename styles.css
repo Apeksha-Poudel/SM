@@ -69,6 +69,19 @@ footer{
     width: 100%;
 }
 
+button{
+    border-radius: 50px;
+    margin: 0 10px;
+}
+
+.headding{
+    display: flex;
+    text-align: right;
+    align-items: center;
+    justify-content:space-between;
+    padding:20px;
+}
+
 /* Dark Mode */
 body.dark-mode {
     background-color: #01291c;
