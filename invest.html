@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Analysis Form</title>
+    <link rel="stylesheet" href="styless.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Start Investing</h1>
+        <form>
+            <!-- Index Selector -->
+            <div class="form-group">
+                <label for="exchange">Select Exchange</label>
+                <select id="exchange" name="exchange">
+                    <option value="nyse">New York Exchange</option>
+                    <option value="lse">London Exchange</option>
+                    <option value="jse">Japan Exchange</option>
+                    <option value="hse">Hong Kong Exchange</option>
+                    <option value="bse">Bombay Exchange</option>
+                    <option value="nse">Nepal Stock Exchange</option>
+                </select>
+                <span class="info-icon" title="Select the exchange where the stock is listed.">ℹ️</span>
+            </div>
+
+            <!-- Company Short Form -->
+            <div class="form-group">
+                <label for="company">Company Short Form</label>
+                <input type="text" id="company" name="company" placeholder="e.g., AAPL">
+                <span class="info-icon" title="Enter the short form or ticker symbol of the company.">ℹ️</span>
+            </div>
+
+            <!-- Current Price -->
+            <div class="form-group">
+                <label for="current-price">Current Price</label>
+                <input type="number" id="current-price" name="current-price" step="0.01" placeholder="e.g., 150.00">
+                <span class="info-icon" title="Enter the current price of the stock.">ℹ️</span>
+            </div>
+
+            <!-- Position Holding Time -->
+            <div class="form-group">
+                <label for="holding-time">Position Holding Time</label>
+                <select id="holding-time" name="holding-time">
+                    <option value="3m">3 months</option>
+                    <option value="6m">6 months</option>
+                    <option value="1y">1 year</option>
+                    <option value="2y">2 years</option>
+                    <option value="3y">3 years</option>
+                    <option value="5y">5+ years</option>
+                </select>
+                <span class="info-icon" title="Select the expected holding time for the stock.">ℹ️</span>
+            </div>
+
+            <!-- Basic Indicators -->
+            <div class="form-group">
+                <label for="50day-ma">50-Day Moving Average</label>
+                <input type="number" id="50day-ma" name="50day-ma" step="0.01" placeholder="e.g., 145.00">
+                <span class="info-icon" title="Enter the 50-day moving average of the stock.">ℹ️</span>
+            </div>
+
+            <div class="form-group">
+                <label for="rsi">Current RSI</label>
+                <input type="number" id="rsi" name="rsi" step="0.01" placeholder="e.g., 65.00">
+                <span class="info-icon" title="Enter the current Relative Strength Index (RSI) of the stock.">ℹ️</span>
+            </div>
+
+            <div class="form-group">
+                <label for="pe-ratio">P/E Ratio</label>
+                <input type="number" id="pe-ratio" name="pe-ratio" step="0.01" placeholder="e.g., 25.00">
+                <span class="info-icon" title="Enter the Price-to-Earnings (P/E) ratio of the stock.">ℹ️</span>
+            </div>
+
+            <div class="form-group">
+                <label for="book-value">Book Value</label>
+                <input type="number" id="book-value" name="book-value" step="0.01" placeholder="e.g., 50.00">
+                <span class="info-icon" title="Enter the book value of the stock.">ℹ️</span>
+            </div>
+
+            <!-- Advanced Investing Toggle -->
+            <div class="form-group toggle-advance">
+                <label for="advance-toggle">Advanced Investing</label>
+                <input type="checkbox" id="advance-toggle">
+            </div>
+
+            <!-- Advanced Indicators (Hidden by default) -->
+            <div id="advanced-fields" class="advanced-fields">
+                <div class="form-group">
+                    <label for="100day-ma">100-Day Moving Average</label>
+                    <input type="number" id="100day-ma" name="100day-ma" step="0.01" placeholder="e.g., 140.00">
+                    <span class="info-icon" title="Enter the 100-day moving average of the stock.">ℹ️</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="200day-ma">200-Day Moving Average</label>
+                    <input type="number" id="200day-ma" name="200day-ma" step="0.01" placeholder="e.g., 130.00">
+                    <span class="info-icon" title="Enter the 200-day moving average of the stock.">ℹ️</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="bb-upper">Bollinger Band - Upper</label>
+                    <input type="number" id="bb-upper" name="bb-upper" step="0.01" placeholder="e.g., 160.00">
+                    <span class="info-icon" title="Enter the upper Bollinger Band value of the stock.">ℹ️</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="bb-mid">Bollinger Band - Middle</label>
+                    <input type="number" id="bb-mid" name="bb-mid" step="0.01" placeholder="e.g., 150.00">
+                    <span class="info-icon" title="Enter the middle Bollinger Band value of the stock.">ℹ️</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="bb-lower">Bollinger Band - Lower</label>
+                    <input type="number" id="bb-lower" name="bb-lower" step="0.01" placeholder="e.g., 140.00">
+                    <span class="info-icon" title="Enter the lower Bollinger Band value of the stock.">ℹ️</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="beta-value">Beta Value</label>
+                    <input type="number" id="beta-value" name="beta-value" step="0.01" placeholder="e.g., 1.25">
+                    <span class="info-icon" title="Enter the beta value of the stock.">ℹ️</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="alpha-value">Alpha Value</label>
+                    <input type="number" id="alpha-value" name="alpha-value" step="0.01" placeholder="e.g., 0.75">
+                    <span class="info-icon" title="Enter the alpha value of the stock.">ℹ️</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="dividend-yield">Past Year Dividend Yield (%)</label>
+                    <input type="number" id="dividend-yield" name="dividend-yield" step="0.01" placeholder="e.g., 2.50">
+                    <span class="info-icon" title="Enter the past year's dividend yield of the stock.">ℹ️</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="de-ratio">Debt-to-Equity Ratio</label>
+                    <input type="number" id="de-ratio" name="de-ratio" step="0.01" placeholder="e.g., 0.85">
+                    <span class="info-icon" title="Enter the debt-to-equity ratio of the stock.">ℹ️</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="chart-upload">Upload Chart Screenshot</label>
+                    <input type="file" id="chart-upload" name="chart-upload" accept="image/*">
+                    <span class="info-icon" title="Upload a chart screenshot for pattern analysis.">ℹ️</span>
+                </div>
+            </div>
+
+            <!-- Analyze Button -->
+            <div class="form-group">
+                <button type="submit" class="analyze-button">Analyze and Predict</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
