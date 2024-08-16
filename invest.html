@@ -9,142 +9,277 @@
 <body>
 
     <div class="container">
-        <h1>Start Investing</h1>
+        <!-- Advanced Investing Toggle -->
+        <div class="form-group toggle-advance">
+            <div class="heading-container">
+                <h1 id="heading">Start Investing (Basic)</h1>
+            </div>
+            <div class="toggle-container">
+                <label class="switch">
+                    <span class="tooltip" id="toggle-tooltip" title="Advance Investing Off">
+                        <input type="checkbox" id="advance-toggle">
+                        <span class="slider round"></span>
+                </span>
+                </label>
+            </div>
+        </div>
+
+
         <form>
             <!-- Index Selector -->
             <div class="form-group">
-                <label for="exchange">Select Exchange</label>
+                <label for="exchange">
+                    Select Stock Exchange
+                    <span class="compulsory-icon" title="Compulsory Field">
+                        *
+                    </span> 
+                    <span class="info-icon" title="Select the exchange where the stock is listed.">
+                        ⓘ
+                    </span>
+                </label>
                 <select id="exchange" name="exchange">
-                    <option value="nyse">New York Exchange</option>
-                    <option value="lse">London Exchange</option>
-                    <option value="jse">Japan Exchange</option>
-                    <option value="hse">Hong Kong Exchange</option>
-                    <option value="bse">Bombay Exchange</option>
-                    <option value="nse">Nepal Stock Exchange</option>
+                    <option value="NASDAQ">NASDAQ, USA</option>
+                    <option value="NEPSE">NEPSE, Nepal</option>
+                    <option value="LSE">LSE, UK</option>
+                    <option value="HKEX">HKEX, Hong Kong</option>
+                    <option value="BSE SENSEX">BSE SENSEX, India</option>
+                    <option value="JPX">JPX, Japan</option>
                 </select>
-                <span class="info-icon" title="Select the exchange where the stock is listed.">ℹ️</span>
             </div>
 
-            <!-- Company Short Form -->
-            <div class="form-group">
-                <label for="company">Company Short Form</label>
-                <input type="text" id="company" name="company" placeholder="e.g., AAPL">
-                <span class="info-icon" title="Enter the short form or ticker symbol of the company.">ℹ️</span>
+            <!-- Inline Group for Stock Info -->
+            <div class="form-group inline-group">
+                <!-- Company Short Form -->
+                <div class="inline-item">
+                    <label for="company">
+                        Company Symbol
+                        <span class="compulsory-icon" title="Compulsory Field">
+                            *
+                        </span> 
+                        <span class="info-icon" title="Enter the short form or ticker symbol of the company.">ⓘ</span>
+                    </label>
+                    <input type="text" id="company" name="company" placeholder="e.g., AAPL">
+                    <span class="error-message" id="company-error"></span>
+                </div>
+
+                <!-- Current Price -->
+                <div class="inline-item">
+                    <label for="current-price">
+                        Current Price
+                        <span class="compulsory-icon" title="Compulsory Field">
+                            *
+                        </span> 
+                        <span class="info-icon" title="Enter the current price of the stock.">ⓘ</span>
+                    </label>
+                    <input type="number" id="current-price" name="current-price" step="0.01" placeholder="e.g., 150.00">
+                    <span class="error-message" id="current-price-error"></span>
+                </div>
+
+                <!-- Position Holding Time -->
+                <div class="inline-item">
+                    <label for="holding-time">
+                        Holding Time
+                        <span class="compulsory-icon" title="Compulsory Field">
+                            *
+                        </span> 
+                        <span class="info-icon" title="Select the expected holding time for the stock.">ⓘ</span>
+                    </label>
+                    <select id="holding-time" name="holding-time">
+                        <option value="3m">3 months</option>
+                        <option value="6m">6 months</option>
+                        <option value="1y">1 year</option>
+                        <option value="2y">2 years</option>
+                        <option value="3y">3 years</option>
+                        <option value="5y">5+ years</option>
+                    </select>
+                    <span class="error-message" id="holding-time-error"></span>
+                </div>
             </div>
 
-            <!-- Current Price -->
-            <div class="form-group">
-                <label for="current-price">Current Price</label>
-                <input type="number" id="current-price" name="current-price" step="0.01" placeholder="e.g., 150.00">
-                <span class="info-icon" title="Enter the current price of the stock.">ℹ️</span>
+            <!-- Inline Group for PE Ratio and Book Value -->
+            <div class="form-group inline-group">
+                <!-- PE Ratio -->
+                <div class="inline-item">
+                    <label for="pe-ratio">
+                        P/E Ratio
+                        <span class="compulsory-icon" title="Compulsory Field">
+                            *
+                        </span> 
+                        <span class="info-icon" title="Enter the Price-to-Earnings (P/E) ratio of the stock.">ⓘ</span>
+                    </label>
+                    <input type="number" id="pe-ratio" name="pe-ratio" step="0.01" placeholder="e.g., 25.00">
+                    <span class="error-message" id="pe-ratio-error"></span>
+                </div>
+
+                <!-- Book Value -->
+                <div class="inline-item">
+                    <label for="book-value">
+                        Book Value
+                        <span class="compulsory-icon" title="Compulsory Field">
+                            *
+                        </span> 
+                        <span class="info-icon" title="Enter the book value of the stock.">ⓘ</span>
+                    </label>
+                    <input type="number" id="book-value" name="book-value" step="0.01" placeholder="e.g., 50.00">
+                    <span class="error-message" id="book-value-error"></span>
+                </div>
             </div>
 
-            <!-- Position Holding Time -->
-            <div class="form-group">
-                <label for="holding-time">Position Holding Time</label>
-                <select id="holding-time" name="holding-time">
-                    <option value="3m">3 months</option>
-                    <option value="6m">6 months</option>
-                    <option value="1y">1 year</option>
-                    <option value="2y">2 years</option>
-                    <option value="3y">3 years</option>
-                    <option value="5y">5+ years</option>
-                </select>
-                <span class="info-icon" title="Select the expected holding time for the stock.">ℹ️</span>
-            </div>
+            <!-- Inline Group for 50-Day Moving Average and Current RSI -->
+            <div class="form-group inline-group">
+                <!-- 50-Day Moving Average -->
+                <div class="inline-item">
+                    <label for="50day-ma">
+                        50-Day Moving Average
+                        <span class="compulsory-icon" title="Compulsory Field">
+                            *
+                        </span> 
+                        <span class="info-icon" title="Enter the 50-day moving average of the stock.">ⓘ</span>
+                    </label>
+                    <input type="number" id="50day-ma" name="50day-ma" step="0.01" placeholder="e.g., 145.00">
+                    <span class="error-message" id="50day-ma-error"></span>
+                </div>
 
-            <!-- Basic Indicators -->
-            <div class="form-group">
-                <label for="50day-ma">50-Day Moving Average</label>
-                <input type="number" id="50day-ma" name="50day-ma" step="0.01" placeholder="e.g., 145.00">
-                <span class="info-icon" title="Enter the 50-day moving average of the stock.">ℹ️</span>
-            </div>
-
-            <div class="form-group">
-                <label for="rsi">Current RSI</label>
-                <input type="number" id="rsi" name="rsi" step="0.01" placeholder="e.g., 65.00">
-                <span class="info-icon" title="Enter the current Relative Strength Index (RSI) of the stock.">ℹ️</span>
-            </div>
-
-            <div class="form-group">
-                <label for="pe-ratio">P/E Ratio</label>
-                <input type="number" id="pe-ratio" name="pe-ratio" step="0.01" placeholder="e.g., 25.00">
-                <span class="info-icon" title="Enter the Price-to-Earnings (P/E) ratio of the stock.">ℹ️</span>
-            </div>
-
-            <div class="form-group">
-                <label for="book-value">Book Value</label>
-                <input type="number" id="book-value" name="book-value" step="0.01" placeholder="e.g., 50.00">
-                <span class="info-icon" title="Enter the book value of the stock.">ℹ️</span>
-            </div>
-
-            <!-- Advanced Investing Toggle -->
-            <div class="form-group toggle-advance">
-                <label for="advance-toggle">Advanced Investing</label>
-                <input type="checkbox" id="advance-toggle">
+                <!-- Current RSI -->
+                <div class="inline-item">
+                    <label for="rsi">
+                        Current RSI
+                        <span class="compulsory-icon" title="Compulsory Field">
+                            *
+                        </span> 
+                        <span class="info-icon" title="Enter the current Relative Strength Index (RSI) of the stock.">ⓘ</span>
+                    </label>
+                    <input type="number" id="rsi" name="rsi" step="0.01" placeholder="e.g., 65.00">
+                    <span class="error-message" id="rsi-error"></span>
+                </div>
             </div>
 
             <!-- Advanced Indicators (Hidden by default) -->
             <div id="advanced-fields" class="advanced-fields">
-                <div class="form-group">
-                    <label for="100day-ma">100-Day Moving Average</label>
-                    <input type="number" id="100day-ma" name="100day-ma" step="0.01" placeholder="e.g., 140.00">
-                    <span class="info-icon" title="Enter the 100-day moving average of the stock.">ℹ️</span>
+                <!-- Inline Group for Moving Averages -->
+                <div class="form-group inline-group">
+                    <!-- 100-Day Moving Average -->
+                    <div class="inline-item">
+                        <label for="100day-ma">
+                            100-Day MA
+                            <span class="info-icon" title="Enter the 100-day moving average of the stock.">ⓘ</span>
+                        </label>
+                        <input type="number" id="100day-ma" name="100day-ma" step="0.01" placeholder="e.g., 140.00">
+                    </div>
+
+                    <!-- 200-Day Moving Average -->
+                    <div class="inline-item">
+                        <label for="200day-ma">
+                            200-Day MA
+                            <span class="info-icon" title="Enter the 200-day moving average of the stock.">ⓘ</span>
+                        </label>
+                        <input type="number" id="200day-ma" name="200day-ma" step="0.01" placeholder="e.g., 130.00">
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="200day-ma">200-Day Moving Average</label>
-                    <input type="number" id="200day-ma" name="200day-ma" step="0.01" placeholder="e.g., 130.00">
-                    <span class="info-icon" title="Enter the 200-day moving average of the stock.">ℹ️</span>
+
+                <!-- Inline Group for Bollinger Bands -->
+                <div class="form-group inline-group">
+                    <!-- Bollinger Band - Upper -->
+                    <div class="inline-item">
+                        <label for="bb-upper">
+                            Bollinger Band - Upper
+                            <span class="info-icon" title="Enter the upper Bollinger Band value of the stock.">ⓘ</span>
+                        </label>
+                        <input type="number" id="bb-upper" name="bb-upper" step="0.01" placeholder="e.g., 160.00">
+                        <span class="error-message" id="bb-upper-error"></span>
+                    </div>
+
+                    <!-- Bollinger Band - Middle -->
+                    <div class="inline-item">
+                        <label for="bb-mid">
+                            Bollinger Band - Middle
+                            <span class="info-icon" title="Enter the middle Bollinger Band value of the stock.">ⓘ</span>
+                        </label>
+                        <input type="number" id="bb-mid" name="bb-mid" step="0.01" placeholder="e.g., 150.00">
+                        <span class="error-message" id="bb-mid-error"></span>
+                    </div>
+
+                    <!-- Bollinger Band - Lower -->
+                    <div class="inline-item">
+                        <label for="bb-lower">
+                            Bollinger Band - Lower
+                            <span class="info-icon" title="Enter the lower Bollinger Band value of the stock.">ⓘ</span>
+                        </label>
+                        <input type="number" id="bb-lower" name="bb-lower" step="0.01" placeholder="e.g., 140.00">
+                        <span class="error-message" id="bb-lower-error"></span>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="bb-upper">Bollinger Band - Upper</label>
-                    <input type="number" id="bb-upper" name="bb-upper" step="0.01" placeholder="e.g., 160.00">
-                    <span class="info-icon" title="Enter the upper Bollinger Band value of the stock.">ℹ️</span>
+                <!-- Inline Group for Alpha and Beta Values -->
+                <div class="form-group inline-group">
+                    <!-- Alpha Value -->
+                    <div class="inline-item">
+                        <label for="alpha-value">
+                            Alpha Value
+                            <span class="info-icon" title="Enter the alpha value of the stock.">ⓘ</span>
+                        </label>
+                        <input type="number" id="alpha-value" name="alpha-value" step="0.01" placeholder="e.g., 0.75">
+                    </div>
+
+                    <!-- Beta Value -->
+                    <div class="inline-item">
+                        <label for="beta-value">
+                            Beta Value
+                            <span class="info-icon" title="Enter the beta value of the stock.">ⓘ</span>
+                        </label>
+                        <input type="number" id="beta-value" name="beta-value" step="0.01" placeholder="e.g., 1.25">
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="bb-mid">Bollinger Band - Middle</label>
-                    <input type="number" id="bb-mid" name="bb-mid" step="0.01" placeholder="e.g., 150.00">
-                    <span class="info-icon" title="Enter the middle Bollinger Band value of the stock.">ℹ️</span>
+                <!-- Inline Group for Financial Metrics -->
+                <div class="form-group inline-group">
+                    <!-- Past Year Dividend Yield -->
+                    <div class="inline-item">
+                        <label for="dividend-yield">
+                            Past Year Dividend Yield (%)
+                            <span class="info-icon" title="Enter the past year's dividend yield of the stock.">ⓘ</span>
+                        </label>
+                        <input type="number" id="dividend-yield" name="dividend-yield" step="0.01" placeholder="e.g., 2.50">
+                    </div>
+
+                    <!-- Debt-to-Equity Ratio -->
+                    <div class="inline-item">
+                        <label for="de-ratio">
+                            Debt-to-Equity Ratio
+                            <span class="info-icon" title="Enter the debt-to-equity ratio of the stock.">ⓘ</span>
+                        </label>
+                        <input type="number" id="de-ratio" name="de-ratio" step="0.01" placeholder="e.g., 0.85">
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="bb-lower">Bollinger Band - Lower</label>
-                    <input type="number" id="bb-lower" name="bb-lower" step="0.01" placeholder="e.g., 140.00">
-                    <span class="info-icon" title="Enter the lower Bollinger Band value of the stock.">ℹ️</span>
-                </div>
+                <!-- Inline Group for Market Sentiment and Chart Upload -->
+                <div class="form-group inline-group">
+                    <!-- Market Sentiment -->
+                    <div class="inline-item">
+                        <label for="market-sentiment">
+                            Market Sentiment
+                            <span class="info-icon" title="Select the sentiment of the overall market.">ⓘ</span>
+                        </label>
+                        <select id="market-sentiment" name="market-sentiment">
+                            <option value="Neutral">Neutral - Market is stable with no strong trend</option>
+                            <option value="Sideways">Sideways - No significant movement expected</option>
+                            <option value="Volatile">Volatile - Expecting significant price fluctuations</option>
+                            <option value="Bullish">Bullish - Expecting a rise in the market</option>
+                            <option value="Bearish">Bearish - Expecting a decline in the market</option>
+                        </select>
+                    </div>
 
-                <div class="form-group">
-                    <label for="beta-value">Beta Value</label>
-                    <input type="number" id="beta-value" name="beta-value" step="0.01" placeholder="e.g., 1.25">
-                    <span class="info-icon" title="Enter the beta value of the stock.">ℹ️</span>
+                    <!-- Upload Chart Screenshot -->
+                    <div class="inline-item">
+                        <label for="chart-upload">
+                            Upload Chart Screenshot
+                            <span class="info-icon" title="Upload a chart screenshot for pattern analysis.">ⓘ</span>
+                        </label>
+                        <input type="file" id="chart-upload" name="chart-upload" accept="image/*">
+                    </div>
                 </div>
-
-                <div class="form-group">
-                    <label for="alpha-value">Alpha Value</label>
-                    <input type="number" id="alpha-value" name="alpha-value" step="0.01" placeholder="e.g., 0.75">
-                    <span class="info-icon" title="Enter the alpha value of the stock.">ℹ️</span>
-                </div>
-
-                <div class="form-group">
-                    <label for="dividend-yield">Past Year Dividend Yield (%)</label>
-                    <input type="number" id="dividend-yield" name="dividend-yield" step="0.01" placeholder="e.g., 2.50">
-                    <span class="info-icon" title="Enter the past year's dividend yield of the stock.">ℹ️</span>
-                </div>
-
-                <div class="form-group">
-                    <label for="de-ratio">Debt-to-Equity Ratio</label>
-                    <input type="number" id="de-ratio" name="de-ratio" step="0.01" placeholder="e.g., 0.85">
-                    <span class="info-icon" title="Enter the debt-to-equity ratio of the stock.">ℹ️</span>
-                </div>
-
-                <div class="form-group">
-                    <label for="chart-upload">Upload Chart Screenshot</label>
-                    <input type="file" id="chart-upload" name="chart-upload" accept="image/*">
-                    <span class="info-icon" title="Upload a chart screenshot for pattern analysis.">ℹ️</span>
-                </div>
+                
             </div>
 
             <!-- Analyze Button -->
