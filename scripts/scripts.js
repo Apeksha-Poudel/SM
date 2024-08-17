@@ -221,6 +221,8 @@ function enableDarkMode() {
         ...document.querySelectorAll('.head-button:hover'),
         ...document.querySelectorAll('.foot-button-github'),
         ...document.querySelectorAll('.foot-button-github:hover'),
+        ...document.querySelectorAll('.section.small'),
+        ...document.querySelectorAll('.section.big'),
         ...document.querySelectorAll('input[type="file"]')
     ];
 
@@ -250,6 +252,8 @@ function disableDarkMode() {
         ...document.querySelectorAll('.head-button:hover'),
         ...document.querySelectorAll('.foot-button-github'),
         ...document.querySelectorAll('.foot-button-github:hover'),
+        ...document.querySelectorAll('.section.small'),
+        ...document.querySelectorAll('.section.big'),
         ...document.querySelectorAll('input[type="file"]')
     ];
 
@@ -279,18 +283,10 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 document.addEventListener("DOMContentLoaded", function() {
-    const button = document.querySelector(".head-button");
+    let button = document.querySelector(".head-button");
 
     button.addEventListener("click", function() {
-        window.location.href = "index.html";
-    });
-});
-
-document.addEventListener("DOMContentLoaded", function() {
-    const button = document.querySelector(".start-invest");
-
-    button.addEventListener("click", function() {
-        window.location.href = "invest.html";
+        window.location.href = "../index.html";
     });
 });
 
@@ -329,3 +325,52 @@ document.addEventListener("DOMContentLoaded", function() {
      }
  });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Function to show a specific section and hide the others
+    function showSection(section) {
+        const homeSection = document.getElementById('home-section');
+        const aboutSection = document.getElementById('about-section');
+        const contactSection = document.getElementById('contact-section');
+        const investSection = document.getElementById('invest-section');
+
+        // Hide all sections
+        homeSection.style.display = 'none';
+        aboutSection.style.display = 'none';
+        contactSection.style.display = 'none';
+        investSection.style.display = 'none';
+
+        // Show the requested section
+        if (section === 'home') {
+            homeSection.style.display = 'block';
+        } else if (section === 'about') {
+            aboutSection.style.display = 'block';
+        } else if (section === 'contact') {
+            contactSection.style.display = 'block';
+        } else if (section === 'invest') {
+            investSection.style.display = 'block';
+        }
+    }
+
+    // Add click event listener for the "Start Investing" button
+    document.querySelector('.start-invest').addEventListener('click', function() {
+        showSection('invest');
+    });
+
+    // Add click event listeners to the other menu items
+    document.getElementById('home').addEventListener('click', function() {
+        showSection('home');
+    });
+
+    document.getElementById('about').addEventListener('click', function() {
+        showSection('about');
+    });
+
+    document.getElementById('contact').addEventListener('click', function() {
+        showSection('contact');
+    });
+
+    // Initially show the home section
+    showSection('home');
+});
+

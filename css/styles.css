@@ -196,6 +196,36 @@ input:checked + .slider:before {
     background-color: #e7e7d7; /* Dark green on hover */
 }
 
+.head-button-other {
+    background-color: #e7e7d7; /* Bright red button */
+    color: #212529;
+    font: normal;
+    border: none;
+    padding: 0px 0px;
+    cursor: pointer;
+    border-radius: 0px; /* Rounded corners for button */
+    font-size: auto;
+}
+
+.head-button-other:hover {
+    background-color: #e7e7d7; /* Dark green on hover */
+}
+
+.foot-button-github-other {
+    background-color: #e7e7d7; /* Bright red button */
+    color: #212529;
+    font: normal;
+    border: none;
+    padding: 0px 0px;
+    cursor: pointer;
+    border-radius: 0px; /* Rounded corners for button */
+    font-size: auto;
+}
+
+.foot-button-github-other:hover {
+    background-color: #e7e7d7; /* Dark green on hover */
+}
+
 button a {
     color: #f8f9fa;
     font: bold;
@@ -216,7 +246,9 @@ button:hover {
     background-color: #2a9d8f; /* Dark green on hover */
 }
 
-footer.footer {
+footer .footer {
+    display: flex;
+    flex: 1;
     text-align: center;
     padding: 20px;
     background-color: #e7e7d7;
@@ -236,17 +268,31 @@ footer.footer {
 /* Form and Advanced Toggle Styling */
 .section.small {
     flex: 1;
-    padding-left: 25%;
-    padding-right: 25%;
-    padding-top: 5%;
-    padding-bottom: 5%;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    padding: 20px;
+    background-color: #e7e7d7;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+.section.big.dark-mode,
+.section.small.dark-mode {
+    background-color: #283618;
+}
+
 .section.big {
     flex: 1;
-    padding-left: 25%;
-    padding-right: 25%;
-    padding-top: 2%;
-    padding-bottom: 2%;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    padding: 20px;
+    background-color: #e7e7d7;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .form-group {
@@ -448,13 +494,18 @@ body.dark-mode {
 
 .header.dark-mode,
 .footer.dark-mode,
-.side-menu.dark-mode,
-input[type="text"].dark-mode,
-input[type="number"].dark-mode,
-textarea.large.message-box.dark-mode {
+.side-menu.dark-mode {
     background-color: #283618; /* Changing #e7e7d7 to #283618 */
     color: #f8f9fa; /* Changing #212529 to #f8f9fa */
     border-color: #283618; /* Adjust input and textarea borders */
+}
+
+input[type="text"].dark-mode,
+input[type="number"].dark-mode,
+textarea.large.message-box.dark-mode {
+    background-color: #e7e7d7; /* Changing #e7e7d7 to #283618 */
+    color: #283618; /* Changing #212529 to #f8f9fa */
+    border-color: #e7e7d7; /* Adjust input and textarea borders */
 }
 
 .side-menu ul li a.dark-mode,
@@ -476,9 +527,9 @@ textarea.large.message-box.dark-mode {
 
 /* Dark Mode Styles for Select and File Inputs */
 select.dark-mode {
-    background-color: #283618; /* Background color for dark mode */
-    color: #f8f9fa; /* Text color for dark mode */
-    border: 1px solid #606c38; /* Border color for dark mode */
+    background-color: #e7e7d7; /* Background color for dark mode */
+    color: #283618; /* Text color for dark mode */
+    border: 1px solid #e7e7d7; /* Border color for dark mode */
 }
 
 input[type="file"].dark-mode {
@@ -486,8 +537,8 @@ input[type="file"].dark-mode {
 }
 
 input[type="file"].dark-mode::file-selector-button {
-    background-color: #283618; /* Button background color for dark mode */
-    color: #f8f9fa; /* Button text color for dark mode */
+    background-color: #e7e7d7; /* Button background color for dark mode */
+    color: #283618; /* Button text color for dark mode */
 }
 .close-btn.dark-mode {
     color: #f8f9fa;
@@ -502,6 +553,14 @@ input[type="file"]{
 .head-button:hover.dark-mode,
 .foot-button-github.dark-mode,
 .foot-button-github:hover.dark-mode {
+    background-color: #283618;
+    color: #f8f9fa;
+}
+
+.head-button-other .dark-mode,
+.head-button-other:hover .dark-mode,
+.foot-button-github-other .dark-mode,
+.foot-button-github-other:hover .dark-mode {
     background-color: #283618;
     color: #f8f9fa;
 }
@@ -558,6 +617,7 @@ input[type="file"]{
 .description-container {
     flex: 1;
     padding: 20px;
+    padding-top: 40px;
     background-color: #e7e7d7;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -622,7 +682,7 @@ input[type="file"]{
 
 .stock-image {
     max-width: 100%;
-    height: auto;
+    height: 95%;
     border-radius: 8px;
 }
 
@@ -641,9 +701,13 @@ input[type="file"]{
 }
 
 .about-container {
-    padding: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
     max-width: 800px;
-    margin: 30px auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    margin-left: auto;
+    margin-right: auto;
     background-color: #e7e7d7;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -653,6 +717,10 @@ input[type="file"]{
     font-size: 36px;
     color: #2a9d8f;
     margin-bottom: 20px;
+}
+
+.about-text {
+    text-align: justify;
 }
 
 .about-text, .features-list {
@@ -669,6 +737,9 @@ input[type="file"]{
 
 .creator-photo {
     margin-right: 20px;
+    margin-top: 5px;
+    align-items: center;
+    text-align: center;
 }
 
 .creator-image {
@@ -681,14 +752,16 @@ input[type="file"]{
     font-size: 28px;
     color: #e63946;
     margin-bottom: 10px;
+    margin-top: -10px;
 }
 
 .social-links {
     margin-top: 20px;
+    margin-left: 10px;
 }
 
 .social-icon {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     margin-right: 10px;
 }
