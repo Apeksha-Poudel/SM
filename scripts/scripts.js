@@ -381,53 +381,32 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 // home, about, contact, invest switcher
-document.addEventListener('DOMContentLoaded', function() {
-    // Function to show a specific section and hide the others
-    function showSection(section) {
-        // Get references to all the sections by their IDs
-        const homeSection = document.getElementById('home-section');
-        const aboutSection = document.getElementById('about-section');
-        const contactSection = document.getElementById('contact-section');
-        const investSection = document.getElementById('invest-section');
-
-        // Hide all sections by setting their display style to 'none'
-        homeSection.style.display = 'none';
-        aboutSection.style.display = 'none';
-        contactSection.style.display = 'none';
-        investSection.style.display = 'none';
-
-        // Show the requested section based on the 'section' parameter
-        if (section === 'home') {
-            homeSection.style.display = 'block'; // Show the Home section
-        } else if (section === 'about') {
-            aboutSection.style.display = 'block'; // Show the About section
-        } else if (section === 'contact') {
-            contactSection.style.display = 'block'; // Show the Contact section
-        } else if (section === 'invest') {
-            investSection.style.display = 'block'; // Show the Invest section
+document.addEventListener("DOMContentLoaded", function() {
+    // Function to handle smooth scrolling to the target section
+    function smoothScroll(targetId) {
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth' });
         }
     }
 
-    // Add click event listener for the "Start Investing" button
-    document.querySelector('.start-invest').addEventListener('click', function() {
-        showSection('invest'); // Show the Invest section when the button is clicked
+    // Event listeners for each menu item
+    document.getElementById("home").addEventListener("click", function() {
+        smoothScroll("home-section");
     });
 
-    // Add click event listeners to the other menu items for navigation
-    document.getElementById('home').addEventListener('click', function() {
-        showSection('home'); // Show the Home section when clicked
+    document.getElementById("about").addEventListener("click", function() {
+        smoothScroll("about-section");
     });
 
-    document.getElementById('about').addEventListener('click', function() {
-        showSection('about'); // Show the About section when clicked
+    document.getElementById("contact").addEventListener("click", function() {
+        smoothScroll("contact-section");
     });
 
-    document.getElementById('contact').addEventListener('click', function() {
-        showSection('contact'); // Show the Contact section when clicked
+    document.querySelector(".start-invest").addEventListener("click", function() {
+        smoothScroll("invest-section");
     });
-
-    // Initially show the Home section when the page loads
-    showSection('home');
 });
+
 
 
