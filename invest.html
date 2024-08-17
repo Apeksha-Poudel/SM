@@ -3,33 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stock Analysis Form</title>
-    <link rel="stylesheet" href="styless.css">
+    <title>Predict || SM</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <header class="header">
+        <div class="header-content">
+            <h1>SM Analyzer</h1>
+            <div class="menu-icon">
+                &#9776; <!-- Hamburger icon -->
+            </div>
+        </div>
+    </header>
+    <nav id="side-menu" class="side-menu">
+        <span class="close-btn">&times;</span>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li>
+                <span>Dark Mode
+                    <label class="switch">
+                        <input type="checkbox" id="light-dark-toggle">
+                        <span class="slider round"></span>
+                    </label>
+                </span>
+            </li>
+        </ul>
+    </nav>
 
-    <div class="container">
+    <!-- Main Section -->
+    <div class="section small" id="main-form">
         <!-- Advanced Investing Toggle -->
         <div class="form-group toggle-advance">
             <div class="heading-container">
                 <h1 id="heading">Start Investing (Basic)</h1>
             </div>
             <div class="toggle-container">
-                <label class="switch">
-                    <span class="tooltip" id="toggle-tooltip" title="Advance Investing Off">
-                        <input type="checkbox" id="advance-toggle">
+                <span class="tooltip" id="toggle-tooltip" title="Advance Investing Off">
+                    <label class="switch">
+                        <input type="checkbox" id="basic-advance-toggle">
                         <span class="slider round"></span>
+                    </label>
                 </span>
-                </label>
             </div>
         </div>
 
-
-        <form>
+        <form class="form">
             <!-- Index Selector -->
             <div class="form-group">
                 <label for="exchange">
-                    Select Stock Exchange
+                    Stock Exchange
                     <span class="compulsory-icon" title="Compulsory Field">
                         *
                     </span> 
@@ -37,7 +61,7 @@
                         ⓘ
                     </span>
                 </label>
-                <select id="exchange" name="exchange">
+                <select id="exchange" name="exchange" class="small">
                     <option value="NASDAQ">NASDAQ, USA</option>
                     <option value="NEPSE">NEPSE, Nepal</option>
                     <option value="LSE">LSE, UK</option>
@@ -155,7 +179,7 @@
             </div>
 
             <!-- Advanced Indicators (Hidden by default) -->
-            <div id="advanced-fields" class="advanced-fields">
+            <div id="advanced-fields" class="advanced-fields" style="display: none;">
                 <!-- Inline Group for Moving Averages -->
                 <div class="form-group inline-group">
                     <!-- 100-Day Moving Average -->
@@ -176,7 +200,6 @@
                         <input type="number" id="200day-ma" name="200day-ma" step="0.01" placeholder="e.g., 130.00">
                     </div>
                 </div>
-
 
                 <!-- Inline Group for Bollinger Bands -->
                 <div class="form-group inline-group">
@@ -276,6 +299,8 @@
                             Upload Chart Screenshot
                             <span class="info-icon" title="Upload a chart screenshot for pattern analysis.">ⓘ</span>
                         </label>
+                        <br>
+                        <br>
                         <input type="file" id="chart-upload" name="chart-upload" accept="image/*">
                     </div>
                 </div>
@@ -288,6 +313,10 @@
             </div>
         </form>
     </div>
+
+    <footer class="footer">
+        <h3>© SM . 2024 . <a class="no-underline" href="https://github.com/rohanrajpoudel" target="_blank">Rohan Raj Poudel</a></h3>
+    </footer>
 
     <script src="scripts.js"></script>
 </body>

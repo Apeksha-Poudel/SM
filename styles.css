@@ -1,30 +1,121 @@
-/* Default Light Mode */
 body {
-    background-color: white;
-    color: black;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.no-underline {
-    text-decoration: none; 
-}
-
-
-.container {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa; /* 90% White */
+    color: #212529; /* Black text */
     display: flex;
-    text-align: right;
-    padding: 10px;
-    justify-content:space-around;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #e9ecef; /* 86% White */
+    color: #212529; /* Black text */
+    position: relative;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center content horizontally */
+    width: 100%;
+    position: relative;
+}
+
+.header-content h1 {
+    margin: 0;
+    font-size: 48px; /* Increase font size */
+    text-align: center;
+    flex-grow: 1; /* Ensure it takes up available space */
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.menu-icon {
+    font-size: 32px;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    color: #212529; /* Black color */
+}
+
+/* Other existing styles */
+
+.side-menu {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #e9ecef; /* 86% White background */
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.side-menu .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 36px;
+    cursor: pointer;
+    color: #212529; /* Black color */
+}
+
+.side-menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     align-items: center;
 }
 
-/* Toggle Switch Styles */
+.side-menu ul li {
+    font-weight: bold;
+    text-align: center;
+    font-size: 24px;
+    width: 100%;
+    position: relative;
+    margin: 20px 0;
+}
+
+.side-menu ul li:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    bottom: -100%;
+    left: 10%;
+    width: 80%;
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.side-menu ul li a {
+    color: #212529;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.side-menu ul li a:hover {
+    color: #e63946; /* Light Green on hover */
+}
+
+/* Toggle Switch Styling */
 .switch {
     position: relative;
     display: inline-block;
-    width: 50px;
-    height: 25px;
-    margin-left: auto;
+    width: 40px;
+    height: 24px;
 }
 
 .switch input {
@@ -40,89 +131,281 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
-    transition: .3s;
-    border-radius: 30px;
+    background-color: #666666; /* Darker grey */
+    transition: 0.4s;
 }
 
 .slider:before {
     position: absolute;
     content: "";
-    height: 20px;
-    width: 20px;
-    left: 2.5px;
+    height: 18px;
+    width: 18px;
+    left: 3px;
     bottom: 3px;
-    background-color: rgb(0, 0, 0);
-    transition: .4s;
-    border-radius: 50%;
+    background-color: #f8f9fa;
+    transition: 0.4s;
 }
 
 input:checked + .slider {
-    background-color: #ff0000;
+    background-color: #e63946; /* Dark red */
 }
 
 input:checked + .slider:before {
-    transform: translateX(22px);
+    transform: translateX(18px);
 }
 
-footer{
-    color: rgb(0, 0, 0);
+.slider.round {
+    border-radius: 24px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.container {
+    flex: 1;
+}
+
+button a {
+    color: #f8f9fa;
+    font: bold;
+}
+
+button {
+    background-color: #e63946; /* Bright red button */
+    color: #f8f9fa;
+    font: bold;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 8px; /* Rounded corners for button */
+    font-size: 18px;
+}
+
+button:hover {
+    background-color: #2a9d8f; /* Dark green on hover */
+}
+
+footer.footer {
     text-align: center;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: #bac0bd;
-    
+    padding: 20px;
+    background-color: #e9ecef;
+    color: #212529;
+    margin-top: auto;
 }
 
-button{
-    border-radius: 50px;
-    margin: 0 10px;
+.footer a {
+    color: #212529;
+    text-decoration: none;
 }
 
-.headding{
+.footer a:hover {
+    text-decoration: underline;
+}
+
+/* Form and Advanced Toggle Styling */
+.section.small {
+    flex: 1;
+    padding-left: 25%;
+    padding-right: 25%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+.section.big {
+    flex: 1;
+    padding-left: 25%;
+    padding-right: 25%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+.form-group {
+    margin-bottom: 15px;
     display: flex;
-    text-align: right;
     align-items: center;
-    justify-content:space-between;
 }
 
-/* Dark Mode */
-body.dark-mode {
-    background-color: #01291c;
-    color: rgb(255, 255, 255);
+.small {
+    position: relative;
+    width: 50%;
+    margin-left: auto;
+    margin-right: 0;
 }
 
-.section.dark-mode{
-    background-color: #023318;
+
+.inline-group {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
-.h1{
-    margin-left: auto; 
-    margin-right: auto; 
-}
-.section {
-    background-color: #bac0bd;
+.inline-item {
+    flex: 1;
+    margin-right: 10px;
+    min-width: 250px;
 }
 
-footer.dark-mode {
-    color: rgb(255, 252, 252);
+.inline-item:last-child {
+    margin-right: 0;
+}
+
+.toggle-advance {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.heading-container h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.toggle-container {
+    display: flex;
+    align-items: center;
+    padding-right: 2%;
+}
+
+.advanced-fields {
+    display: none;
+}
+
+/* Tooltip styling */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #212529;
+    color: #f8f9fa;
     text-align: center;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: #023318;
-    
-}
-.large{
-    width:250px;
-    height:50px;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%; /* Position the tooltip above the text */
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
 }
 
-.big{
-    width:400px;
-    height:310px;
-    position: absolute;
-    left: 35%;
-    top:30%;
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Additional input styles */
+input[type="text"], input[type="number"], select {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 10px 0;
+    display: inline-block;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Analyze button styling */
+.analyze-button {
+    background-color: #e63946; /* Bright red */
+    color: #f8f9fa;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    font-weight: bold;  /* Makes the text bold */
+    font-size: 28px;    /* Increases the font size */
+}
+
+.analyze-button:hover {
+    background-color: #2a9d8f; /* Dark red */
+}
+
+/* .info-icon {
+    padding-left: 1%;
+} */
+
+/* Increase input and label sizes */
+form label {
+    font-size: 18px;
+    display: inline-block;
+    padding-right: 10px;
+}
+
+form input.large, form textarea.large {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 10px 0;
+    border: 1px solid #e9ecef;
+    border-radius: 8px; /* Rounded corners */
+    box-sizing: border-box;
+    font-size: 16px; /* Increased font size */
+}
+
+/* Textarea specific styling */
+textarea.large.message-box {
+    height: 150px; /* Approx. 6 lines */
+    resize: none;
+}
+
+/* Error message styling */
+.error-message {
+    color: #e63946; /* Bright red */
+    font-size: 12px;
+    display: block;
+    margin-top: 5px;
+}
+
+/* Character counter styling */
+#char-counter {
+    display: block;
+    text-align: left;
+    font-size: 12px;
+    color: #555;
+    margin-top: 5px;
+}
+
+/* Textarea red border for character limit exceeded */
+textarea.exceeded {
+    border-color: #e63946; /* Bright red */
+}
+
+/* Success banner styling */
+.success-banner {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: lightgreen;
+    color: darkgreen;
+    font-weight: bold;
+    display: none;
+}
+
+/* Form layout styling */
+.form-group {
+    display: flex;
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+.label-division {
+    flex: 1;
+    text-align: right;
+    padding-right: 20px;
+}
+
+.field-division {
+    flex: 2;
+    text-align: left;
+}
+
+.compulsory-icon {
+    color: #e63946; /* Bright red */
 }

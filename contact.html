@@ -1,40 +1,96 @@
 <!DOCTYPE html>
-<lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="styles.css">
-        <div class="section">
-            <div class="headding">
-                <h2>Title</h2>
-                <div>
-                    <button class="definition"><a class="no-underline" href="index.html">Home</a></button>
-                    <button class="definition">About us</button>
-                    <button class="definition"><a class="no-underline" href="contact.html">Contact us</a></button>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1>SM Analyzer</h1>
+            <div class="menu-icon">
+                &#9776; <!-- Hamburger icon -->
+            </div>
+        </div>
+    </header>
+    <nav id="side-menu" class="side-menu">
+        <span class="close-btn">&times;</span>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li>
+                <span>Dark Mode
                     <label class="switch">
-                        <input type="checkbox" id="mode-toggle">
-                        <span class="slider round">
-                        </span>
+                        <input type="checkbox" id="light-dark-toggle">
+                        <span class="slider round"></span>
+                    </label>
+                </span>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="section small">
+        <form class="form" id="contact-form" style="text-align: center;">
+            <h1 style="text-align: center;" class="contact">Contact Us</h1>
+
+            <div class="form-group">
+                <div class="label-division">
+                    <label for="name">Name
+                        <span class="compulsory-icon" title="Compulsory Field">
+                            *
+                        </span> 
+                        :
                     </label>
                 </div>
+                <div class="field-division">
+                    <input id="name" class="large" placeholder="eg. John Doe" maxlength="30">
+                    <span class="error-message" id="name-error"></span>
+                </div>
             </div>
-        </div> 
-    </head>
-    <body>
-    <div class="section big" >
-    <form class="form" style="text-align: center;">
-        <h2 style="text-align: center;">CONTACT US</h2>
-        <p type="Name:"><input class="large" placeholder="Write your name here.."></input></p>
-        <p type="Email:"><input class="large" placeholder="Let us know how to contact you back.."></input></p>
-        <p type="Message:"><input class="large" placeholder="What would you like to tell us.."></input></p>
-        <button>Send Message</button>
-        <div>
-        </div>
-      </form>
+
+            <div class="form-group">
+                <div class="label-division">
+                    <label for="email">Email
+                        <span class="compulsory-icon" title="Compulsory Field">
+                            *
+                        </span> 
+                        :
+                    </label>
+                </div>
+                <div class="field-division">
+                    <input id="email" class="large" placeholder="eg. john.doe@example.com" maxlength="50">
+                    <span class="error-message" id="email-error"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label-division">
+                    <label for="message">Message
+                        <span class="compulsory-icon" title="Compulsory Field">
+                            *
+                        </span> 
+                        :
+                    </label>
+                </div>
+                <div class="field-division">
+                    <textarea id="message" class="large message-box" placeholder="Hi, I loved your product. I'd like to share you with..."></textarea>
+                    <span class="error-message" id="message-error"></span>
+                    <span id="char-counter">0/250</span>
+                </div>
+            </div>
+
+            <button type="submit">Send Message</button>
+            <div id="success-banner" class="success-banner"></div>
+        </form>
     </div>
-        <footer>
-            <h3>© SM . 2024 . Rohan Raj Poudel</h3>
-        </footer>
-            <script src="script.js"></script>
-    </body>
-    </html>
+
+    <footer class="footer">
+        <h3>© SM . 2024 . <a class="no-underline" href="https://github.com/rohanrajpoudel" target="_blank">Rohan Raj Poudel</a></h3>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>

@@ -1,74 +1,165 @@
-// Handle the advanced toggle to show/hide advanced fields
-document.getElementById('advance-toggle').addEventListener('change', function() {
-    const container = document.querySelector('.container');
-    const advancedFields = document.getElementById('advanced-fields');
-    
-    if (this.checked) {
-        container.classList.add('full-page');
-        advancedFields.style.display = 'block'; // Show advanced fields
-    } else {
-        container.classList.remove('full-page');
-        advancedFields.style.display = 'none'; // Hide advanced fields
-    }
-});
-
-// Handle form submission
-document.querySelector('form').addEventListener('submit', function(event) {
-    // Get all the compulsory fields
-    const compulsoryFields = [
-        { id: 'company', name: 'Company Symbol' },
-        { id: 'current-price', name: 'Current Price' },
-        { id: 'holding-time', name: 'Holding Time' },
-        { id: 'pe-ratio', name: 'P/E Ratio' },
-        { id: 'book-value', name: 'Book Value' },
-        { id: '50day-ma', name: '50-Day Moving Average' },
-        { id: 'rsi', name: 'Current RSI' }
-    ];
-
-    // Get all the Bollinger Band fields
-    const bollingerFields = [
-        { id: 'bb-upper', name: 'Bollinger Band - Upper' },
-        { id: 'bb-mid', name: 'Bollinger Band - Middle' },
-        { id: 'bb-lower', name: 'Bollinger Band - Lower' }
-    ];
-
-    let isValid = true; // Assume the form is valid initially
-
-    // Validate compulsory fields
-    compulsoryFields.forEach(function(field) {
-        const inputElement = document.getElementById(field.id);
-        const errorElement = document.getElementById(`${field.id}-error`);
-
-        if (inputElement.value.trim() === '') {
-            isValid = false;
-            // Show error message
-            errorElement.textContent = `${field.name} can't be empty.`;
-            errorElement.style.display = 'block';
-            // Add error class to input field
-            inputElement.classList.add('error');
+document.addEventListener('DOMContentLoaded', function() {
+    // Side Menu Toggle and Close Functions
+    function toggleMenu() {
+        var menu = document.getElementById("side-menu");
+        // Toggle menu width between 0px (closed) and 250px (open)
+        if (menu.style.width === "0px" || menu.style.width === "") {
+            menu.style.width = "250px";
         } else {
-            // Hide error message if input is not empty
-            errorElement.textContent = '';
-            errorElement.style.display = 'none';
-            // Remove error class from input field
-            inputElement.classList.remove('error');
+            menu.style.width = "0px";
+        }
+    }
+
+    function closeMenu() {
+        // Directly set menu width to 0px to close it
+        document.getElementById("side-menu").style.width = "0px";
+    }
+
+    // Add event listener for side menu toggle
+    document.querySelector('.menu-icon').addEventListener('click', toggleMenu);
+    // Add event listener for side menu close button
+    document.querySelector('.close-btn').addEventListener('click', closeMenu);
+
+    // Advanced Investing Toggle Function
+    const toggleSwitch = document.getElementById('basic-advance-toggle');
+    toggleSwitch.addEventListener('change', function() {
+        // Get the heading element
+        const heading = document.getElementById('heading');
+        // Get the advanced fields container
+        const advancedFields = document.getElementById('advanced-fields');
+        // Get the tooltip element
+        const tooltip = document.getElementById('toggle-tooltip');
+        // Get the main-form element
+        const mainForm = document.getElementById('main-form');
+        
+        // Toggle between showing and hiding advanced fields
+        if (toggleSwitch.checked) {
+            heading.textContent = 'Start Investing (Advanced)';
+            advancedFields.style.display = 'block';
+            tooltip.setAttribute('title', 'Advance Investing On');
+            mainForm.setAttribute('class', 'section big');
+        } else {
+            heading.textContent = 'Start Investing (Basic)';
+            advancedFields.style.display = 'none';
+            tooltip.setAttribute('title', 'Advance Investing Off');
+            mainForm.setAttribute('class', 'section big');
+        }
+    });
+});
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('contact-form');
+    const nameField = document.getElementById('name');
+    const emailField = document.getElementById('email');
+    const messageField = document.getElementById('message');
+    const charCounter = document.getElementById('char-counter');
+    const successBanner = document.getElementById('success-banner');
+
+    // Regular expression for email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // Character count update for the message field
+    messageField.addEventListener('input', function () {
+        const messageLength = messageField.value.length;
+        charCounter.textContent = `${messageLength}/250`;
+
+        if (messageLength > 250) {
+            messageField.classList.add('exceeded');
+            document.getElementById('message-error').textContent = "You can directly email us at poudelrohan58@gmail.com";
+        } else {
+            messageField.classList.remove('exceeded');
+            document.getElementById('message-error').textContent = "";
         }
     });
 
-    // Validate Bollinger Band fields if any are filled
-    const bbUpper = document.getElementById('bb-upper').value.trim();
-    const bbMid = document.getElementById('bb-mid').value.trim();
-    const bbLower = document.getElementById('bb-lower').value.trim();
+    // Form submission validation
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
 
-    if (bbUpper || bbMid || bbLower) {
-        bollingerFields.forEach(function(field) {
+        let hasError = false;
+
+        // Name validation
+        if (nameField.value.length < 3 || nameField.value.length > 30) {
+            document.getElementById('name-error').textContent = "Name must be at least 3 characters long";
+            nameField.classList.add('exceeded');
+            hasError = true;
+        } else {
+            document.getElementById('name-error').textContent = "";
+            nameField.classList.remove('exceeded');
+        }
+
+        // Email validation
+        if (emailField.value.length > 50 || !emailRegex.test(emailField.value)) {
+            document.getElementById('email-error').textContent = "Please enter a valid email";
+            emailField.classList.add('exceeded');
+            hasError = true;
+        } else {
+            document.getElementById('email-error').textContent = "";
+            emailField.classList.remove('exceeded');
+        }
+
+        // Message validation
+        if (messageField.value.length < 3) {
+            document.getElementById('message-error').textContent = "Message must be at least 3 characters long";
+            messageField.classList.add('exceeded');
+            hasError = true;
+        } else if (messageField.value.length > 250) {
+            messageField.classList.add('exceeded');
+            document.getElementById('message-error').textContent = "You can directly email us at poudelrohan58@gmail.com";
+            hasError = true;
+        } else {
+            messageField.classList.remove('exceeded');
+            document.getElementById('message-error').textContent = "";
+        }
+
+        if (!hasError) {
+            // Clear fields and show success banner
+            nameField.value = "";
+            emailField.value = "";
+            messageField.value = "";
+            charCounter.textContent = "0/250";
+            successBanner.textContent = "Thank you! Your message has been sent.";
+            successBanner.style.display = "block";
+
+            setTimeout(() => {
+                successBanner.style.display = "none";
+            }, 5000);
+        }
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector('form');
+
+    form.addEventListener('submit', function(event) {
+        // Get all the compulsory fields
+        const compulsoryFields = [
+            { id: 'company', name: 'Company Symbol' },
+            { id: 'current-price', name: 'Current Price' },
+            { id: 'holding-time', name: 'Holding Time' },
+            { id: 'pe-ratio', name: 'P/E Ratio' },
+            { id: 'book-value', name: 'Book Value' },
+            { id: '50day-ma', name: '50-Day Moving Average' },
+            { id: 'rsi', name: 'Current RSI' }
+        ];
+
+        // Get all the Bollinger Band fields
+        const bollingerFields = [
+            { id: 'bb-upper', name: 'Bollinger Band - Upper' },
+            { id: 'bb-mid', name: 'Bollinger Band - Middle' },
+            { id: 'bb-lower', name: 'Bollinger Band - Lower' }
+        ];
+
+        let isValid = true; // Assume the form is valid initially
+
+        // Validate compulsory fields
+        compulsoryFields.forEach(function(field) {
             const inputElement = document.getElementById(field.id);
             const errorElement = document.getElementById(`${field.id}-error`);
 
             if (inputElement.value.trim() === '') {
                 isValid = false;
                 // Show error message
-                errorElement.textContent = `${field.name} is required if any Bollinger Band values are provided.`;
+                errorElement.textContent = `${field.name} is required.`;
                 errorElement.style.display = 'block';
                 // Add error class to input field
                 inputElement.classList.add('error');
@@ -80,22 +171,37 @@ document.querySelector('form').addEventListener('submit', function(event) {
                 inputElement.classList.remove('error');
             }
         });
-    }
 
-    // If the form is invalid, prevent submission
-    if (!isValid) {
-        event.preventDefault(); // Prevent form submission
-    }
-});
+        // Validate Bollinger Band fields if any are filled
+        const bbUpper = document.getElementById('bb-upper').value.trim();
+        const bbMid = document.getElementById('bb-mid').value.trim();
+        const bbLower = document.getElementById('bb-lower').value.trim();
 
-document.getElementById('advance-toggle').addEventListener('change', function() {
-    const tooltip = document.getElementById('toggle-tooltip');
-    const heading = document.getElementById('heading');
-    if (this.checked) {
-        tooltip.title = 'Advance Investing On';
-        heading.textContent = 'Start Investing (Advanced)';
-    } else {
-        tooltip.title = 'Advance Investing Off';
-        heading.textContent = 'Start Investing (Basic)';
-    }
+        if (bbUpper || bbMid || bbLower) {
+            bollingerFields.forEach(function(field) {
+                const inputElement = document.getElementById(field.id);
+                const errorElement = document.getElementById(`${field.id}-error`);
+
+                if (inputElement.value.trim() === '') {
+                    isValid = false;
+                    // Show error message
+                    errorElement.textContent = `All Bollinger Band value are required`;
+                    errorElement.style.display = 'block';
+                    // Add error class to input field
+                    inputElement.classList.add('error');
+                } else {
+                    // Hide error message if input is not empty
+                    errorElement.textContent = '';
+                    errorElement.style.display = 'none';
+                    // Remove error class from input field
+                    inputElement.classList.remove('error');
+                }
+            });
+        }
+
+        // If the form is invalid, prevent submission
+        if (!isValid) {
+            event.preventDefault(); // Prevent form submission
+        }
+    });
 });
