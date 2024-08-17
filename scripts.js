@@ -20,31 +20,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add event listener for side menu close button
     document.querySelector('.close-btn').addEventListener('click', closeMenu);
 
-    // Advanced Investing Toggle Function
-    const toggleSwitch = document.getElementById('basic-advance-toggle');
-    toggleSwitch.addEventListener('change', function() {
-        // Get the heading element
-        const heading = document.getElementById('heading');
-        // Get the advanced fields container
-        const advancedFields = document.getElementById('advanced-fields');
-        // Get the tooltip element
-        const tooltip = document.getElementById('toggle-tooltip');
-        // Get the main-form element
-        const mainForm = document.getElementById('main-form');
-        
-        // Toggle between showing and hiding advanced fields
-        if (toggleSwitch.checked) {
-            heading.textContent = 'Start Investing (Advanced)';
-            advancedFields.style.display = 'block';
-            tooltip.setAttribute('title', 'Advance Investing On');
-            mainForm.setAttribute('class', 'section big');
-        } else {
-            heading.textContent = 'Start Investing (Basic)';
-            advancedFields.style.display = 'none';
-            tooltip.setAttribute('title', 'Advance Investing Off');
-            mainForm.setAttribute('class', 'section big');
-        }
-    });
 });
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('contact-form');
@@ -312,9 +287,45 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 document.addEventListener("DOMContentLoaded", function() {
+    const button = document.querySelector(".start-invest");
+
+    button.addEventListener("click", function() {
+        window.location.href = "invest.html";
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
     const button = document.querySelector(".foot-button-github");
 
     button.addEventListener("click", function() {
         window.open("https://github.com/rohanrajpoudel", "_blank");
     });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+ // Advanced Investing Toggle Function
+ const toggleSwitch = document.getElementById('basic-advance-toggle');
+ toggleSwitch.addEventListener('change', function() {
+     // Get the heading element
+     const heading = document.getElementById('heading');
+     // Get the advanced fields container
+     const advancedFields = document.getElementById('advanced-fields');
+     // Get the tooltip element
+     const tooltip = document.getElementById('toggle-tooltip');
+     // Get the main-form element
+     const mainForm = document.getElementById('main-form');
+     
+     // Toggle between showing and hiding advanced fields
+     if (toggleSwitch.checked) {
+         heading.textContent = 'Start Investing (Advanced)';
+         advancedFields.style.display = 'block';
+         tooltip.setAttribute('title', 'Advance Investing On');
+         mainForm.setAttribute('class', 'section big');
+     } else {
+         heading.textContent = 'Start Investing (Basic)';
+         advancedFields.style.display = 'none';
+         tooltip.setAttribute('title', 'Advance Investing Off');
+         mainForm.setAttribute('class', 'section small');
+     }
+ });
 });
