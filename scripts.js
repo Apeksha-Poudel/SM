@@ -205,3 +205,92 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if dark mode was previously enabled
+    if (localStorage.getItem('dark-mode') === 'enabled') {
+        enableDarkMode();
+        document.getElementById('mode-toggle').checked = true;
+    }
+
+    // Add event listener for the toggle switch
+    document.getElementById('mode-toggle').addEventListener('change', function() {
+        if (this.checked) {
+            enableDarkMode();
+            localStorage.setItem('dark-mode', 'enabled');
+        } else {
+            disableDarkMode();
+            localStorage.setItem('dark-mode', 'disabled');
+        }
+    });
+});
+
+function enableDarkMode() {
+    document.body.classList.add('dark-mode');
+
+    const elementsToToggle = [
+        document.querySelector('.header'),
+        document.querySelector('.footer'),
+        document.querySelector('.side-menu'),
+        ...document.querySelectorAll('input[type="text"]'),
+        ...document.querySelectorAll('input[type="number"]'),
+        ...document.querySelectorAll('textarea.large.message-box'),
+        ...document.querySelectorAll('.menu-icon'),
+        ...document.querySelectorAll('.side-menu ul li a'),
+        ...document.querySelectorAll('.side-menu ul li a:hover'),
+        ...document.querySelectorAll('.footer a'),
+        ...document.querySelectorAll('.tooltip .tooltiptext'),
+        ...document.querySelectorAll('select'),
+        ...document.querySelectorAll('.close-btn'),
+        ...document.querySelectorAll('input[type="file"]')
+    ];
+
+    elementsToToggle.forEach(element => {
+        element.classList.add('dark-mode');
+    });
+}
+
+function disableDarkMode() {
+    document.body.classList.remove('dark-mode');
+
+    const elementsToToggle = [
+        document.querySelector('.header'),
+        document.querySelector('.footer'),
+        document.querySelector('.side-menu'),
+        ...document.querySelectorAll('input[type="text"]'),
+        ...document.querySelectorAll('input[type="number"]'),
+        ...document.querySelectorAll('textarea.large.message-box'),
+        ...document.querySelectorAll('.menu-icon'),
+        ...document.querySelectorAll('.side-menu ul li a'),
+        ...document.querySelectorAll('.side-menu ul li a:hover'),
+        ...document.querySelectorAll('.footer a'),
+        ...document.querySelectorAll('.tooltip .tooltiptext'),
+        ...document.querySelectorAll('select'),
+        ...document.querySelectorAll('.close-btn'),
+        ...document.querySelectorAll('input[type="file"]')
+    ];
+
+    elementsToToggle.forEach(element => {
+        element.classList.remove('dark-mode');
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const fileInput = document.getElementById('chart-upload');
+
+    fileInput.addEventListener('change', function () {
+        const file = fileInput.files[0];
+        const allowedExtensions = ['image/png', 'image/jpeg', 'image/jpg'];
+        const maxSize = 3 * 1024 * 1024; // 5MB in bytes
+
+        if (file) {
+            if (!allowedExtensions.includes(file.type)) {
+                alert('Invalid file type. Please upload a PNG, JPEG, or JPG file.');
+                fileInput.value = ''; // Clear the file input
+            } else if (file.size > maxSize) {
+                alert('File size exceeds 3MB. Please upload a smaller file.');
+                fileInput.value = ''; // Clear the file input
+            }
+        }
+    });
+});

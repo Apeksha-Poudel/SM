@@ -58,7 +58,7 @@ body {
     padding-top: 60px;
 }
 
-.side-menu .close-btn {
+.close-btn {
     position: absolute;
     top: 10px;
     right: 20px;
@@ -408,4 +408,63 @@ textarea.exceeded {
 
 .compulsory-icon {
     color: #e63946; /* Bright red */
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: #606c38; /* Changing #f8f9fa to #606c38 */
+    color: #f8f9fa; /* Changing #212529 to #f8f9fa */
+}
+
+.header.dark-mode,
+.footer.dark-mode,
+.side-menu.dark-mode,
+input[type="text"].dark-mode,
+input[type="number"].dark-mode,
+textarea.large.message-box.dark-mode {
+    background-color: #283618; /* Changing #e9ecef to #283618 */
+    color: #f8f9fa; /* Changing #212529 to #f8f9fa */
+    border-color: #283618; /* Adjust input and textarea borders */
+}
+
+.side-menu ul li a.dark-mode,
+.menu-icon.dark-mode,
+.footer a.dark-mode,
+.tooltip .tooltiptext.dark-mode {
+    color: #f8f9fa; /* Changing #212529 to #f8f9fa */
+}
+
+.side-menu ul li a:hover.dark-mode {
+    color: #e63946; /* Red on hover */
+}
+
+/* Ensure buttons and toggle slider colors remain unchanged */
+button.dark-mode,
+.slider.dark-mode {
+    background-color: inherit;
+    color: inherit;
+}
+
+/* Dark Mode Styles for Select and File Inputs */
+select.dark-mode {
+    background-color: #283618; /* Background color for dark mode */
+    color: #f8f9fa; /* Text color for dark mode */
+    border: 1px solid #606c38; /* Border color for dark mode */
+}
+
+input[type="file"].dark-mode {
+    color: #f8f9fa; /* Text color for dark mode */
+}
+
+input[type="file"].dark-mode::file-selector-button {
+    background-color: #283618; /* Button background color for dark mode */
+    color: #f8f9fa; /* Button text color for dark mode */
+}
+.close-btn.dark-mode {
+    color: #f8f9fa;
+}
+
+input[type="file"]{
+    padding-left: 8%;
+    padding-right: 8%;
 }
