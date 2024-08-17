@@ -249,11 +249,15 @@ button:hover {
 footer .footer {
     display: flex;
     flex: 1;
-    text-align: center;
-    padding: 20px;
-    background-color: #e7e7d7;
-    color: #212529;
+    padding: 10px;
     margin-top: auto;
+}
+
+.footer {
+    text-align: center;
+    background-color: #e7e7d7; /* Changing #e7e7d7 to #283618 */
+    color: #283618; /* Changing #212529 to #f8f9fa */
+    border-color: #e7e7d7; /* Adjust input and textarea borders */
 }
 
 .footer a {

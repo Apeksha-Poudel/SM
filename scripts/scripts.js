@@ -192,6 +192,8 @@ document.addEventListener('DOMContentLoaded', function () {
         // If the form is invalid, prevent form submission
         if (!isValid) {
             event.preventDefault(); // Prevent form submission if validation fails
+        } else {
+            storeFormData(); // Store the form data in local storage if no errors
         }
     });
 });
@@ -408,5 +410,31 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+// save form data into the local storage
+function storeFormData() {
+    const formData = {
+        exchange: document.getElementById('exchange').value,
+        company: document.getElementById('company').value,
+        currentPrice: document.getElementById('current-price').value,
+        holdingTime: document.getElementById('holding-time').value,
+        peRatio: document.getElementById('pe-ratio').value,
+        bookValue: document.getElementById('book-value').value,
+        MA50: document.getElementById('50day-ma').value,
+        rsi: document.getElementById('rsi').value,
+        MA100: document.getElementById('100day-ma').value,
+        MA200: document.getElementById('200day-ma').value,
+        bbUpper: document.getElementById('bb-upper').value,
+        bbMid: document.getElementById('bb-mid').value,
+        bbLower: document.getElementById('bb-lower').value,
+        alphaValue: document.getElementById('alpha-value').value,
+        betaValue: document.getElementById('beta-value').value,
+        dividendYield: document.getElementById('dividend-yield').value,
+        deRatio: document.getElementById('de-ratio').value,
+        marketSentiment: document.getElementById('market-sentiment').value,
+        chartUpload: document.getElementById('chart-upload').value,
+    };
+
+    localStorage.setItem('investingFormData', JSON.stringify(formData));
+}
 
 
