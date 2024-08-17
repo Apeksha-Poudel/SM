@@ -242,6 +242,10 @@ function enableDarkMode() {
         ...document.querySelectorAll('.tooltip .tooltiptext'),
         ...document.querySelectorAll('select'),
         ...document.querySelectorAll('.close-btn'),
+        ...document.querySelectorAll('.head-button'),
+        ...document.querySelectorAll('.head-button:hover'),
+        ...document.querySelectorAll('.foot-button-github'),
+        ...document.querySelectorAll('.foot-button-github:hover'),
         ...document.querySelectorAll('input[type="file"]')
     ];
 
@@ -267,6 +271,10 @@ function disableDarkMode() {
         ...document.querySelectorAll('.tooltip .tooltiptext'),
         ...document.querySelectorAll('select'),
         ...document.querySelectorAll('.close-btn'),
+        ...document.querySelectorAll('.head-button'),
+        ...document.querySelectorAll('.head-button:hover'),
+        ...document.querySelectorAll('.foot-button-github'),
+        ...document.querySelectorAll('.foot-button-github:hover'),
         ...document.querySelectorAll('input[type="file"]')
     ];
 
@@ -292,5 +300,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 fileInput.value = ''; // Clear the file input
             }
         }
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    const button = document.querySelector(".head-button");
+
+    button.addEventListener("click", function() {
+        window.location.href = "index.html";
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    const button = document.querySelector(".foot-button-github");
+
+    button.addEventListener("click", function() {
+        window.open("https://github.com/rohanrajpoudel", "_blank");
     });
 });
