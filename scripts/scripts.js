@@ -1,8 +1,10 @@
+// Nav Bar
 document.addEventListener('DOMContentLoaded', function() {
-    // Side Menu Toggle and Close Functions
+    // Function to toggle the side menu's visibility
     function toggleMenu() {
         var menu = document.getElementById("side-menu");
-        // Toggle menu width between 0px (closed) and 250px (open)
+        // Check if the menu is currently closed (width is 0px or unset)
+        // If so, open it by setting width to 250px; otherwise, close it by setting width to 0px
         if (menu.style.width === "0px" || menu.style.width === "") {
             menu.style.width = "250px";
         } else {
@@ -10,18 +12,22 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Function to close the side menu
     function closeMenu() {
-        // Directly set menu width to 0px to close it
+        // Set the menu's width to 0px to close it immediately
         document.getElementById("side-menu").style.width = "0px";
     }
 
-    // Add event listener for side menu toggle
+    // Add an event listener to the menu icon for toggling the side menu
     document.querySelector('.menu-icon').addEventListener('click', toggleMenu);
-    // Add event listener for side menu close button
+    // Add an event listener to the close button for closing the side menu
     document.querySelector('.close-btn').addEventListener('click', closeMenu);
 
 });
+
+// Contact Us Form Validation
 document.addEventListener('DOMContentLoaded', function () {
+    // Get references to form elements and related UI components
     const form = document.getElementById('contact-form');
     const nameField = document.getElementById('name');
     const emailField = document.getElementById('email');
@@ -29,14 +35,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const charCounter = document.getElementById('char-counter');
     const successBanner = document.getElementById('success-banner');
 
-    // Regular expression for email validation
+    // Regular expression for validating email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    // Character count update for the message field
+    // Update character count for the message field
     messageField.addEventListener('input', function () {
         const messageLength = messageField.value.length;
         charCounter.textContent = `${messageLength}/250`;
 
+        // Check if the message exceeds the character limit
         if (messageLength > 250) {
             messageField.classList.add('exceeded');
             document.getElementById('message-error').textContent = "You can directly email us at poudelrohan58@gmail.com";
@@ -46,13 +53,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Form submission validation
+    // Form submission validation and handling
     form.addEventListener('submit', function (e) {
+        // Prevent the default form submission behavior
         e.preventDefault();
 
         let hasError = false;
 
-        // Name validation
+        // Validate the name field (must be between 3 and 30 characters)
         if (nameField.value.length < 3 || nameField.value.length > 30) {
             document.getElementById('name-error').textContent = "Name must be at least 3 characters long";
             nameField.classList.add('exceeded');
@@ -62,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
             nameField.classList.remove('exceeded');
         }
 
-        // Email validation
+        // Validate the email field (must be a valid format and less than 50 characters)
         if (emailField.value.length > 50 || !emailRegex.test(emailField.value)) {
             document.getElementById('email-error').textContent = "Please enter a valid email";
             emailField.classList.add('exceeded');
@@ -72,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
             emailField.classList.remove('exceeded');
         }
 
-        // Message validation
+        // Validate the message field (must be between 3 and 250 characters)
         if (messageField.value.length < 3) {
             document.getElementById('message-error').textContent = "Message must be at least 3 characters long";
             messageField.classList.add('exceeded');
@@ -86,15 +94,17 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('message-error').textContent = "";
         }
 
+        // If no validation errors exist, submit the form
         if (!hasError) {
-            // Clear fields and show success banner
+            // Clear the form fields and reset the character counter
             nameField.value = "";
             emailField.value = "";
             messageField.value = "";
             charCounter.textContent = "0/250";
+
+            // Display the success banner for 5 seconds
             successBanner.textContent = "Thank you! Your message has been sent.";
             successBanner.style.display = "block";
-
             setTimeout(() => {
                 successBanner.style.display = "none";
             }, 5000);
@@ -102,11 +112,14 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+// Investing Form Validation
 document.addEventListener('DOMContentLoaded', function () {
+    // Get reference to the form element
     const form = document.querySelector('form');
 
+    // Add event listener for form submission
     form.addEventListener('submit', function(event) {
-        // Get all the compulsory fields
+        // Define an array of compulsory fields with their corresponding IDs and names
         const compulsoryFields = [
             { id: 'company', name: 'Company Symbol' },
             { id: 'current-price', name: 'Current Price' },
@@ -117,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function () {
             { id: 'rsi', name: 'Current RSI' }
         ];
 
-        // Get all the Bollinger Band fields
+        // Define an array of Bollinger Band fields with their corresponding IDs and names
         const bollingerFields = [
             { id: 'bb-upper', name: 'Bollinger Band - Upper' },
             { id: 'bb-mid', name: 'Bollinger Band - Middle' },
@@ -131,75 +144,79 @@ document.addEventListener('DOMContentLoaded', function () {
             const inputElement = document.getElementById(field.id);
             const errorElement = document.getElementById(`${field.id}-error`);
 
+            // Check if the input field is empty
             if (inputElement.value.trim() === '') {
                 isValid = false;
-                // Show error message
+                // Show error message if field is empty
                 errorElement.textContent = `${field.name} is required.`;
                 errorElement.style.display = 'block';
-                // Add error class to input field
+                // Add error class to the input field
                 inputElement.classList.add('error');
             } else {
-                // Hide error message if input is not empty
+                // Hide error message if field is not empty
                 errorElement.textContent = '';
                 errorElement.style.display = 'none';
-                // Remove error class from input field
+                // Remove error class from the input field
                 inputElement.classList.remove('error');
             }
         });
 
-        // Validate Bollinger Band fields if any are filled
+        // Validate Bollinger Band fields if any of them are filled
         const bbUpper = document.getElementById('bb-upper').value.trim();
         const bbMid = document.getElementById('bb-mid').value.trim();
         const bbLower = document.getElementById('bb-lower').value.trim();
 
         if (bbUpper || bbMid || bbLower) {
+            // If any Bollinger Band field is filled, ensure all are filled
             bollingerFields.forEach(function(field) {
                 const inputElement = document.getElementById(field.id);
                 const errorElement = document.getElementById(`${field.id}-error`);
 
                 if (inputElement.value.trim() === '') {
                     isValid = false;
-                    // Show error message
-                    errorElement.textContent = `All Bollinger Band value are required`;
+                    // Show error message if any Bollinger Band field is empty
+                    errorElement.textContent = `All Bollinger Band values are required`;
                     errorElement.style.display = 'block';
-                    // Add error class to input field
+                    // Add error class to the input field
                     inputElement.classList.add('error');
                 } else {
-                    // Hide error message if input is not empty
+                    // Hide error message if the field is not empty
                     errorElement.textContent = '';
                     errorElement.style.display = 'none';
-                    // Remove error class from input field
+                    // Remove error class from the input field
                     inputElement.classList.remove('error');
                 }
             });
         }
 
-        // If the form is invalid, prevent submission
+        // If the form is invalid, prevent form submission
         if (!isValid) {
-            event.preventDefault(); // Prevent form submission
+            event.preventDefault(); // Prevent form submission if validation fails
         }
     });
 });
 
+// Local Storage for Dark Mode
 document.addEventListener('DOMContentLoaded', function() {
-    // Check if dark mode was previously enabled
+    // Check if dark mode was enabled in the previous session
     if (localStorage.getItem('dark-mode') === 'enabled') {
-        enableDarkMode();
-        document.getElementById('mode-toggle').checked = true;
+        enableDarkMode(); // Enable dark mode if it was previously enabled
+        document.getElementById('mode-toggle').checked = true; // Set the toggle switch to "checked"
     }
 
-    // Add event listener for the toggle switch
+    // Add event listener for the dark mode toggle switch
     document.getElementById('mode-toggle').addEventListener('change', function() {
         if (this.checked) {
-            enableDarkMode();
-            localStorage.setItem('dark-mode', 'enabled');
+            enableDarkMode(); // Enable dark mode when the toggle is switched on
+            localStorage.setItem('dark-mode', 'enabled'); // Save the dark mode status to localStorage
         } else {
-            disableDarkMode();
-            localStorage.setItem('dark-mode', 'disabled');
+            disableDarkMode(); // Disable dark mode when the toggle is switched off
+            localStorage.setItem('dark-mode', 'disabled'); // Save the dark mode status to localStorage
         }
     });
 });
 
+// Enable Dark Mode
 function enableDarkMode() {
     document.body.classList.add('dark-mode');
 
@@ -231,6 +248,7 @@ function enableDarkMode() {
     });
 }
 
+// Disable Dark mode
 function disableDarkMode() {
     document.body.classList.remove('dark-mode');
 
@@ -262,115 +280,154 @@ function disableDarkMode() {
     });
 }
 
+// screenshot validation 3MB, png, jpg, jpeg
 document.addEventListener('DOMContentLoaded', function () {
+    // Get reference to the file input element
     const fileInput = document.getElementById('chart-upload');
 
+    // Add event listener for when a file is selected
     fileInput.addEventListener('change', function () {
-        const file = fileInput.files[0];
-        const allowedExtensions = ['image/png', 'image/jpeg', 'image/jpg'];
-        const maxSize = 3 * 1024 * 1024; // 5MB in bytes
+        const file = fileInput.files[0]; // Get the selected file
+        const allowedExtensions = ['image/png', 'image/jpeg', 'image/jpg']; // Allowed file types
+        const maxSize = 3 * 1024 * 1024; // Maximum allowed file size (3MB in bytes)
 
         if (file) {
+            // Check if the selected file type is not allowed
             if (!allowedExtensions.includes(file.type)) {
                 alert('Invalid file type. Please upload a PNG, JPEG, or JPG file.');
-                fileInput.value = ''; // Clear the file input
-            } else if (file.size > maxSize) {
+                fileInput.value = ''; // Clear the file input to allow for a new selection
+            } 
+            // Check if the selected file size exceeds the allowed limit
+            else if (file.size > maxSize) {
                 alert('File size exceeds 3MB. Please upload a smaller file.');
-                fileInput.value = ''; // Clear the file input
+                fileInput.value = ''; // Clear the file input to allow for a new selection
             }
         }
     });
 });
 
+// header to the home page
 document.addEventListener("DOMContentLoaded", function() {
+    // Get reference to the button element with the class 'head-button'
     let button = document.querySelector(".head-button");
 
+    // Add a click event listener to the button
     button.addEventListener("click", function() {
+        // Redirect the user to the 'index.html' page in the parent directory
         window.location.href = "../index.html";
     });
 });
 
+// Footer to github page
 document.addEventListener("DOMContentLoaded", function() {
+    // Get reference to the button element with the class 'foot-button-github'
     const button = document.querySelector(".foot-button-github");
 
+    // Add a click event listener to the button
     button.addEventListener("click", function() {
+        // Open the GitHub URL in a new browser tab/window
         window.open("https://github.com/rohanrajpoudel", "_blank");
     });
 });
 
+// basic-advance toggle
 document.addEventListener("DOMContentLoaded", function() {
- // Advanced Investing Toggle Function
- const toggleSwitch = document.getElementById('basic-advance-toggle');
- toggleSwitch.addEventListener('change', function() {
-     // Get the heading element
-     const heading = document.getElementById('heading');
-     // Get the advanced fields container
-     const advancedFields = document.getElementById('advanced-fields');
-     // Get the tooltip element
-     const tooltip = document.getElementById('toggle-tooltip');
-     // Get the main-form element
-     const mainForm = document.getElementById('main-form');
-     
-     // Toggle between showing and hiding advanced fields
-     if (toggleSwitch.checked) {
-         heading.textContent = 'Start Investing (Advanced)';
-         advancedFields.style.display = 'block';
-         tooltip.setAttribute('title', 'Advance Investing On');
-         mainForm.setAttribute('class', 'section big');
-     } else {
-         heading.textContent = 'Start Investing (Basic)';
-         advancedFields.style.display = 'none';
-         tooltip.setAttribute('title', 'Advance Investing Off');
-         mainForm.setAttribute('class', 'section small');
-     }
- });
+    // Get the toggle switch element for basic/advanced investing
+    const toggleSwitch = document.getElementById('basic-advance-toggle');
+    
+    // Add event listener for toggle switch change
+    toggleSwitch.addEventListener('change', function() {
+        // Get the heading element
+        const heading = document.getElementById('heading');
+        // Get the advanced fields container
+        const advancedFields = document.getElementById('advanced-fields');
+        // Get the tooltip element
+        const tooltip = document.getElementById('toggle-tooltip');
+        // Get the main-form element
+        const mainForm = document.getElementById('main-form');
+
+        // Toggle between showing and hiding advanced fields
+        if (toggleSwitch.checked) {
+            heading.textContent = 'Start Investing (Advanced)';
+            advancedFields.style.display = 'block';
+            tooltip.setAttribute('title', 'Advance Investing On');
+            if (localStorage.getItem('dark-mode') === 'enabled') {
+                mainForm.setAttribute('class', 'section big dark-mode');
+            } else {
+                mainForm.setAttribute('class', 'section big');
+            }
+        } else {
+            heading.textContent = 'Start Investing (Basic)';
+            advancedFields.style.display = 'none';
+            tooltip.setAttribute('title', 'Advance Investing Off');
+            if (localStorage.getItem('dark-mode') === 'enabled') {
+                mainForm.setAttribute('class', 'section small dark-mode');
+            } else {
+                mainForm.setAttribute('class', 'section small');
+            }
+        }
+
+        // Apply dark mode class if dark mode is enabled
+        if (isDarkModeEnabled) {
+            mainForm.classList.add('dark-mode');
+        }
+    });
+
+    // Apply dark mode class to the main form on initial load if dark mode is enabled
+    if (isDarkModeEnabled) {
+        const mainForm = document.getElementById('main-form');
+        mainForm.classList.add('dark-mode');
+    }
 });
 
+// home, about, contact, invest switcher
 document.addEventListener('DOMContentLoaded', function() {
     // Function to show a specific section and hide the others
     function showSection(section) {
+        // Get references to all the sections by their IDs
         const homeSection = document.getElementById('home-section');
         const aboutSection = document.getElementById('about-section');
         const contactSection = document.getElementById('contact-section');
         const investSection = document.getElementById('invest-section');
 
-        // Hide all sections
+        // Hide all sections by setting their display style to 'none'
         homeSection.style.display = 'none';
         aboutSection.style.display = 'none';
         contactSection.style.display = 'none';
         investSection.style.display = 'none';
 
-        // Show the requested section
+        // Show the requested section based on the 'section' parameter
         if (section === 'home') {
-            homeSection.style.display = 'block';
+            homeSection.style.display = 'block'; // Show the Home section
         } else if (section === 'about') {
-            aboutSection.style.display = 'block';
+            aboutSection.style.display = 'block'; // Show the About section
         } else if (section === 'contact') {
-            contactSection.style.display = 'block';
+            contactSection.style.display = 'block'; // Show the Contact section
         } else if (section === 'invest') {
-            investSection.style.display = 'block';
+            investSection.style.display = 'block'; // Show the Invest section
         }
     }
 
     // Add click event listener for the "Start Investing" button
     document.querySelector('.start-invest').addEventListener('click', function() {
-        showSection('invest');
+        showSection('invest'); // Show the Invest section when the button is clicked
     });
 
-    // Add click event listeners to the other menu items
+    // Add click event listeners to the other menu items for navigation
     document.getElementById('home').addEventListener('click', function() {
-        showSection('home');
+        showSection('home'); // Show the Home section when clicked
     });
 
     document.getElementById('about').addEventListener('click', function() {
-        showSection('about');
+        showSection('about'); // Show the About section when clicked
     });
 
     document.getElementById('contact').addEventListener('click', function() {
-        showSection('contact');
+        showSection('contact'); // Show the Contact section when clicked
     });
 
-    // Initially show the home section
+    // Initially show the Home section when the page loads
     showSection('home');
 });
+
 
