@@ -313,12 +313,12 @@ document.addEventListener('DOMContentLoaded', function () {
             summarizedQuestion.innerHTML = analysisText;
             investFormContainer.style.display = 'none';
             resultContainer.style.display = 'block';   
-            analysisContainer.style.display = 'block';   
             const messageFromAPI = await generateAPIRequest(messageToAPI); // <-- Added await here
-            // Convert markdown to HTML using Showdown
+            // Create a new Showdown converter instance
             const converter = new showdown.Converter();
             const htmlContent = converter.makeHtml(messageFromAPI);
-            analysisResultAI.textContent = htmlContent;
+            analysisResultAI.innerHTML = htmlContent;
+            analysisContainer.style.display = 'block';   
         } else {
             console.log('Form validation failed');
         }
@@ -588,7 +588,7 @@ async function generateAPIRequest(messageToAPI) { // <-- Already async
 
     const response = await fetch(apiUrl, {
         method: 'POST',
-        mode: 'no-cors',
+        // mode: 'no-cors',
         headers: {
             'Content-Type': 'application/json',
             'Cache-Control': 'no-cache',

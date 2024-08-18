@@ -1,10 +1,29 @@
-Below is a detailed `README.md` file for your project:
 
 ---
 
 # SM Analyzer
 
 **SM Analyzer** is a cutting-edge AI-powered platform designed to assist investors in analyzing and predicting stock market trends with precision. This tool was developed during the **Turboline Hackathon** in August 2024 and utilizes advanced algorithms along with OpenAI APIs to deliver comprehensive insights into the stock market, aiding users in making informed investment decisions.
+
+## Important Usage Information
+
+To use the SM Analyzer, please visit [this link](https://apeksha-poudel.github.io/SM/).
+
+**Note:** Due to Cross-Origin Resource Sharing (CORS) restrictions, it is necessary to disable web security in your browser to access and utilize the full functionality of the SM Analyzer. This step is essential as the CORS policy prevents the website from making requests to external servers, which is required for the analyzer to fetch and process the necessary data.
+
+### How to Disable Web Security
+
+If you are using Windows, follow these steps to disable web security in Google Chrome:
+
+1. Open the Command Prompt (`cmd`).
+2. Navigate to the directory where `chrome.exe` is located. This is usually found in the Chrome application folder.
+3. Run the following command:
+   ```bash
+   chrome.exe --user-data-dir="C:/Chrome dev session" --disable-web-security
+   ```
+4. Press `Enter`.
+
+This will launch a new session of Chrome with web security disabled. Please note that this configuration should only be used for development and testing purposes, as disabling web security can expose your browser to potential security risks.
 
 ## Project Overview
 
@@ -49,17 +68,18 @@ SM
 - **HTML**: For structuring the web pages.
 - **CSS**: For styling the web pages and enhancing user experience.
 - **JavaScript**: For adding interactivity and handling user actions.
+- **OpenAI API**: Integrated to provide advanced stock prediction capabilities.
 
 ## Installation and Usage
 
 To run the SM Analyzer locally, follow these steps:
 
 1. **Clone the repository:**
-   ```
+   ```bash
    git clone https://github.com/yourusername/sm-analyzer.git
    ```
 2. **Navigate to the project directory:**
-   ```
+   ```bash
    cd sm-analyzer
    ```
 3. **Open `index.html` in your preferred web browser.**
@@ -68,8 +88,8 @@ That's it! You can now explore the features of SM Analyzer directly from your br
 
 ## Upcoming Features
 
-### Integration with OpenAI API
-We are working on integrating the OpenAI API to provide even more advanced stock prediction capabilities. This feature will allow users to receive AI-generated predictions based on the latest market trends and data, further enhancing the decision-making process for investors.
+### Enhanced OpenAI API Integration
+We are continuously working to improve the integration of the OpenAI API to provide even more advanced stock prediction capabilities. This feature will allow users to receive AI-generated predictions based on the latest market trends and data, further enhancing the decision-making process for investors.
 
 ## About Turboline Hackathon
 
@@ -85,3 +105,5 @@ Connect with Rohan:
 - [Facebook](https://www.facebook.com/rohanrajpoudel.58)
 - [LinkedIn](https://www.linkedin.com/in/rcrrrpoudel/)
 - [GitHub](https://github.com/rohanrajpoudel)
+
+---
