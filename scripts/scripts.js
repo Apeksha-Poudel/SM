@@ -588,6 +588,7 @@ async function generateAPIRequest(messageToAPI) { // <-- Already async
 
     const response = await fetch(apiUrl, {
         method: 'POST',
+        mode: 'no-cors',
         headers: {
             'Content-Type': 'application/json',
             'Cache-Control': 'no-cache',
