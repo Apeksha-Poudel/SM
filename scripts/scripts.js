@@ -107,20 +107,38 @@ document.addEventListener('DOMContentLoaded', function () {
             successBanner.style.display = "block";
             setTimeout(() => {
                 successBanner.style.display = "none";
-            }, 5000);
+            }, 10000);
         }
     });
 });
 
-// Investing Form Validation
+// Investing Form Validation and generating text analysis
 document.addEventListener('DOMContentLoaded', function () {
     // Get reference to the form element
     const form = document.querySelector('form');
+    const resultContainer = document.getElementById('result-container');
+    const analysisContainer = document.getElementById('analysis-container');
+    const investFormContainer = document.getElementById('invest-section');
+    const summarizedQuestion = document.getElementById('question-from-user');
+    const analysisResultAI = document.getElementById('analysis-from-ai');
+
+    // Currency symbols mapping
+    const currencySymbols = {
+        'NASDAQ': '$',
+        'NEPSE': 'NPR',
+        'LSE': '£',
+        'HKEX': 'HKD',
+        'BSE SENSEX': 'INR',
+        'JPX': 'Yen'
+    };
 
     // Add event listener for form submission
-    form.addEventListener('submit', function(event) {
+    form.addEventListener('submit', async function(event) { // <-- Added async here
+        event.preventDefault(); // Prevent the default form submission behavior
+
         // Define an array of compulsory fields with their corresponding IDs and names
         const compulsoryFields = [
+            { id: 'exchange', name: 'Stock Exchange' },
             { id: 'company', name: 'Company Symbol' },
             { id: 'current-price', name: 'Current Price' },
             { id: 'holding-time', name: 'Holding Time' },
@@ -138,12 +156,14 @@ document.addEventListener('DOMContentLoaded', function () {
         ];
 
         let isValid = true; // Assume the form is valid initially
+        let formData = {}; // Initialize formData as an empty object
 
         // Validate compulsory fields
+        let rsiValue = 0;
         compulsoryFields.forEach(function(field) {
             const inputElement = document.getElementById(field.id);
             const errorElement = document.getElementById(`${field.id}-error`);
-
+            
             // Check if the input field is empty
             if (inputElement.value.trim() === '') {
                 isValid = false;
@@ -153,11 +173,29 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Add error class to the input field
                 inputElement.classList.add('error');
             } else {
-                // Hide error message if field is not empty
-                errorElement.textContent = '';
-                errorElement.style.display = 'none';
-                // Remove error class from the input field
-                inputElement.classList.remove('error');
+                // Special validation for RSI
+                rsiValue = parseFloat(inputElement.value.trim());
+                if (field.id === 'rsi') {
+                    if (isNaN(rsiValue) || rsiValue < 0 || rsiValue > 100) {
+                        isValid = false;
+                        errorElement.textContent = `${field.name} must be a number between 0 and 100.`;
+                        errorElement.style.display = 'block';
+                        inputElement.classList.add('error');
+                    } else {
+                        errorElement.textContent = '';
+                        errorElement.style.display = 'none';
+                        inputElement.classList.remove('error');
+                        formData[field.id] = inputElement.value.trim();
+                    }
+                } else {
+                    // Hide error message if field is not empty and valid
+                    errorElement.textContent = '';
+                    errorElement.style.display = 'none';
+                    // Remove error class from the input field
+                    inputElement.classList.remove('error');
+                    // Add the field to formData if it has a value
+                    formData[field.id] = inputElement.value.trim();
+                }
             }
         });
 
@@ -175,7 +213,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (inputElement.value.trim() === '') {
                     isValid = false;
                     // Show error message if any Bollinger Band field is empty
-                    errorElement.textContent = `All Bollinger Band values are required`;
+                    errorElement.textContent = `All Bollinger Band values are required.`;
                     errorElement.style.display = 'block';
                     // Add error class to the input field
                     inputElement.classList.add('error');
@@ -185,15 +223,104 @@ document.addEventListener('DOMContentLoaded', function () {
                     errorElement.style.display = 'none';
                     // Remove error class from the input field
                     inputElement.classList.remove('error');
+                    // Add the field to formData if it has a value
+                    formData[field.id] = inputElement.value.trim();
                 }
             });
         }
 
-        // If the form is invalid, prevent form submission
-        if (!isValid) {
-            event.preventDefault(); // Prevent form submission if validation fails
+        // Handle optional advanced fields
+        const advancedFields = [
+            '100day-ma', '200day-ma', 'alpha-value', 'beta-value', 
+            'dividend-yield', 'de-ratio', 'market-sentiment'
+        ];
+
+        advancedFields.forEach(function(fieldId) {
+            const inputElement = document.getElementById(fieldId);
+            if (inputElement && inputElement.value.trim() !== '') {
+                formData[fieldId] = inputElement.value.trim();
+            }
+        });
+
+        // Handle file upload (if any)
+        const chartUploadElement = document.getElementById('chart-upload');
+        if (chartUploadElement && chartUploadElement.files.length > 0) {
+            formData['chart-upload'] = chartUploadElement.files[0].name;
+        }
+
+        // If the form is valid, proceed with processing the formData
+        if (isValid) {
+            // Hide the form
+            form.style.display = 'none';
+
+            // Construct the analysis text
+            const stockName = formData['company'];
+            const exchangeName = formData['exchange'];
+            const currentPrice = formData['current-price'];
+            rsiValue = formData['rsi'];
+            const ma50Value = formData['50day-ma'];
+            const sentimentValue = formData['market-sentiment'];
+            const holdingTime = formData['holding-time'];
+            const currencySymbol = currencySymbols[exchangeName] || '';
+            
+            let analysisText = `
+                <p>What will happen to ${stockName} listed in ${exchangeName} within the next ${holdingTime}? Here are the supporting data for you to decide:</p>
+                <div id="result-columns" class="result-columns">`;
+            let messageToAPI = ``;
+            let otherData = ``;
+            
+            let fields = compulsoryFields.concat(bollingerFields, advancedFields.map(fieldId => {
+                let labelElement = document.querySelector(`label[for='${fieldId}']`);
+                let labelName = labelElement ? labelElement.textContent.trim() : fieldId.replace(/-/g, ' ');
+            
+                // Remove any non-essential characters like 'ⓘ' from the label name
+                labelName = labelName.replace(/ ⓘ/g, '').trim(); // Removes ⓘ or similar characters
+            
+                return {
+                    id: fieldId,
+                    name: labelName
+                };
+            }));
+            
+            fields.forEach(field => {
+                if (formData[field.id]) {
+                    let value = formData[field.id];
+                    // Add currency symbol for relevant fields
+                    if (['current-price', 'book-value', '50day-ma', '100day-ma', '200day-ma', 'bb-upper', 'bb-mid', 'bb-lower'].includes(field.id)) {
+                        value = `${currencySymbol} ${value}`;
+                    }
+            
+                    analysisText += `
+                        <div class="result-item">
+                            <span class="field-name">${field.name} :&emsp;</span>
+                            <span class="field-value">${value}</span>
+                        </div>`;
+                    if (!['company', 'current-Price', 'exchange', 'rsi', '50day-ma', 'market-sentiment', 'holding-time'].includes(field.id)) {
+                        otherData += `${field.name} : ${value}\n`;
+                    }
+                }
+            });
+            messageToAPI += `(For educational purposes) I was looking at ${stockName} stock listed in ${exchangeName} trading at ${currencySymbol}${currentPrice}. I see that the current RSI is ${rsiValue} and 50-day MA is ${currencySymbol}${ma50Value}. I don't know much but I feel the current market sentiment is ${sentimentValue}. On further investigating the financial report of this company, I found out the following:`
+            messageToAPI += `\n${otherData}`
+            messageToAPI += `\nI've already planned my investment, and I had planned it using only these matrices. Now I want to check if my planning coincides with an AI model like you, and hence asking you. What do you think taking a long position, a short position or taking no position at all is good for the next ${holdingTime}? `
+            messageToAPI += `\nJust tell me the following things:`
+            messageToAPI += `\n1. Long Position or short Position or no position?`
+            messageToAPI += `\n2. Buy Price with Stoploss for Long Position.`
+            messageToAPI += `\n3. Sell Price with Stoploss for Short Position.`
+            messageToAPI += `\n4. Target price (How much profit can I expect?)`;
+
+            analysisText += `</div>`;
+            summarizedQuestion.innerHTML = analysisText;
+            investFormContainer.style.display = 'none';
+            resultContainer.style.display = 'block';   
+            analysisContainer.style.display = 'block';   
+            const messageFromAPI = await generateAPIRequest(messageToAPI); // <-- Added await here
+            // Convert markdown to HTML using Showdown
+            const converter = new showdown.Converter();
+            const htmlContent = converter.makeHtml(messageFromAPI);
+            analysisResultAI.textContent = htmlContent;
         } else {
-            storeFormData(); // Store the form data in local storage if no errors
+            console.log('Form validation failed');
         }
     });
 });
@@ -437,4 +564,38 @@ function storeFormData() {
     localStorage.setItem('investingFormData', JSON.stringify(formData));
 }
 
+async function generateAPIRequest(messageToAPI) { // <-- Already async
+    const apiUrl = 'https://api.turboline.ai/openai/chat/completions';
+    const apiKey = '75e5c3f6d7bd4a3ca277fe2cc97ea695';
 
+    const requestBody = {
+        model: "gpt-4o",
+        messages: [{
+            role: "user",
+            content: messageToAPI
+        }],
+        temperature: 1,
+        top_p: 1,
+        n: 1,
+        stream: false,
+        stop: null,
+        max_tokens: 4096,
+        presence_penalty: 0,
+        frequency_penalty: 0,
+        logit_bias: null,
+        user: "test-user"
+    };
+
+    const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache',
+            'X-TL-Key': apiKey
+        },
+        body: JSON.stringify(requestBody)
+    });
+
+    const responseBody = await response.json();
+    return responseBody.choices[0].message.content;
+}
